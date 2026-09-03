@@ -1,0 +1,4 @@
+title = "Quine local-core secret scanning"
+
+[extend]
+useDefault = true

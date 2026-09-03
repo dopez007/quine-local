@@ -1,0 +1,8 @@
+# JS deps + Vite cache are rebuilt during validation/deploy — never committed.
+frontend/node_modules/
+frontend/.vite/
+# Python bytecode
+__pycache__/
+*.pyc
+# Local dev data fallback (real data lives in the kernel's data/ partition)
+.data/

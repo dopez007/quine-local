@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%2032%2032'%3E%3Crect%20width='32'%20height='32'%20rx='7'%20fill='%237c3aed'/%3E%3Cg%20fill='none'%20stroke='%23fff'%20stroke-width='2.4'%20stroke-linecap='round'%20stroke-linejoin='round'%3E%3Ccircle%20cx='14.5'%20cy='14.5'%20r='7.5'/%3E%3Cpath%20d='M19.5%2019.5L24%2024'/%3E%3Ccircle%20cx='14.5'%20cy='14.5'%20r='3.25'/%3E%3C/g%3E%3C/svg%3E" />
+    <title>Quine</title>
+    <script>
+      // Apply the saved theme before first paint so there's no flash of the wrong look.
+      // useTheme.js owns updates after mount; this only sets the initial data-theme.
+      (function () {
+        try {
+          var t = localStorage.getItem("quine-theme") || localStorage.getItem("aimprove-theme");
+          if (t !== "dark" && t !== "light")
+            t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

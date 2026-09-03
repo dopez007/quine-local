@@ -1,0 +1,21 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.12",
+  "typeCheckingMode": "standard",
+  "exclude": [
+    "**/node_modules",
+    "**/__pycache__",
+    "**/.venv",
+    "app/frontend",
+    "state",
+    "data",
+    "slots",
+    "dist",
+    "tests"
+  ],
+  "executionEnvironments": [
+    { "root": "app" },
+    { "root": ".", "extraPaths": ["app"] }
+  ]
+}

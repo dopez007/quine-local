@@ -1,0 +1,22 @@
+* -text
+*.css text eol=lf
+*.example text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.jsx text eol=lf
+*.lock text eol=lf
+*.md text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.txt text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+.dockerignore text eol=lf
+.gitattributes text eol=lf
+.gitignore text eol=lf
+.gitkeep text eol=lf
+Dockerfile text eol=lf
+LICENSE text eol=lf
+NOTICE text eol=lf
+*.woff2 -text

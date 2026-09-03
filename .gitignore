@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+.npm-cache/
+*.tsbuildinfo
+
+# Quine runtime and private data
+state/*
+!state/secrets.env.example
+slots/
+data/
+.hubai/
+
+# Secrets and local configuration
+.env
+.env.*
+*.env
+!*.env.example
+*.log
+
+# Generated output
+build/
+dist/
+test-results/
+
+# Local agent/tool state
+.claude/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+*.swp

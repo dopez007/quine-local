@@ -1,0 +1,56 @@
+[project]
+name = "quine"
+version = "0.1.0"
+description = "A self-modifying LLM harness modeled on PC architecture"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.110",
+    "uvicorn[standard]>=0.29",
+    "httpx>=0.27",
+    "litellm>=1.40",
+    "pydantic>=2.6",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "python-multipart>=0.0.32",
+    "pypdf>=6.13.3",
+    "cryptography>=49.0.0",
+]
+
+[dependency-groups]
+test = [
+    "psutil>=7.0",
+    "pytest>=8.0",
+    "pytest-asyncio>=0.25",
+]
+lint = [
+    "pyright==1.1.411",
+    "ruff==0.12.0",
+]
+
+# This is an application, not a library: uv manages dependencies but does not build it.
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+# The low-memory suite is deliberately serial. Integration/system work must be selected through
+# scripts/test_low_memory.py so it receives explicit process, memory, and timeout budgets.
+testpaths = [
+    "tests/local/unit",
+    "tests/local/contract",
+]
+addopts = "-q --maxfail=1"
+asyncio_mode = "auto"
+markers = [
+    "unit: pure or tmp-path behavior; no process, socket, Docker, git, or network",
+    "contract: in-process API or adapter contract with fake external boundaries",
+    "integration: explicit serial test with at most one real child/process boundary",
+    "system: named Linux/manual scenario; never part of the default Windows run",
+    "allow_network: contract explicitly permits a mocked or loopback network seam",
+    "allow_process: integration/system contract explicitly permits one owned child process",
+]
+
+[tool.ruff]
+target-version = "py312"
+# Keep ruff's default rule set (pyflakes F + pycodestyle E/W errors); line length isn't enforced
+# (E501 stays off) to match the codebase. The vendored dist copy isn't ours to lint.
+extend-exclude = ["dist"]

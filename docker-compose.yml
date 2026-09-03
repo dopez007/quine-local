@@ -1,0 +1,26 @@
+# Local self-hosted run.
+services:
+  quine:
+    build: .
+    image: quine:latest
+    ports:
+      - "8000:8000"
+    environment:
+      KERNEL_BIND_HOST: "0.0.0.0"
+      # Set to require Bearer auth at the gateway edge; leave empty for open local dev.
+      KERNEL_AUTH_TOKEN: "${KERNEL_AUTH_TOKEN:-}"
+      # Hardened mode (recommended for a real VPS): encrypt state/secrets.env at rest AND run a
+      # fail-closed boot self-check that refuses to serve if the in-container agent could still
+      # reach provider keys (via disk or /proc). Set BOTH vars to enable. QUINE_SECRET_KEY is the
+      # at-rest master key — generate one with:  openssl rand -base64 32  (keep it out of the repo).
+      # Leave both unset for plaintext local dev (unchanged legacy behavior).
+      QUINE_KERNEL_HARDENED: "${QUINE_KERNEL_HARDENED:-}"
+      QUINE_SECRET_KEY: "${QUINE_SECRET_KEY:-}"
+      # Provider key(s). Alternatively put them in state/secrets.env (mounted below).
+      DEEPSEEK_API_KEY: "${DEEPSEEK_API_KEY:-}"
+      ANTHROPIC_API_KEY: "${ANTHROPIC_API_KEY:-}"
+    volumes:
+      # Persist protected state (secrets, version history, audit) and the data partition.
+      - ./state:/app/state
+      - ./data:/app/data
+    restart: unless-stopped

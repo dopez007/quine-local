@@ -1,0 +1,6 @@
+# App-layer dependencies (versioned WITH the app, installed via `uv pip install`).
+# The agent appends to this file when a feature needs a new library.
+# fastapi/uvicorn/httpx are already provided by the shared environment.
+fastapi
+python-multipart  # multipart file uploads (Knowledge tab)
+pypdf             # extract text from uploaded PDFs (Knowledge tab)

@@ -1,0 +1,9 @@
+{
+  "name": "Quine App",
+  "entry": "main:app",
+  "health_path": "/health",
+  "smoke_tests": ["tests/test_smoke.py"],
+  "build": "npm install --no-audit --no-fund && npm run build",
+  "build_dir": "frontend",
+  "serve_root": "frontend/dist/index.html"
+}

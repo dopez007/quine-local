@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  python:
+    name: Local-core tests and static checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+      - name: Sync dependencies
+        run: uv sync --frozen --group test --group lint
+      - name: Verify tracked public manifest
+        run: uv run python tests/support/public_manifest.py
+      - name: Low-memory local tests
+        run: uv run --group test python scripts/test_low_memory.py contract
+      - name: Ruff
+        run: uv run --group lint ruff check .
+      - name: Pyright
+        run: uv run --group lint pyright
+
+  frontend:
+    name: Local UI audit + reproducible build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: app/frontend/package-lock.json
+      - name: Install dependencies
+        working-directory: app/frontend
+        run: npm ci
+      - name: Audit dependencies
+        working-directory: app/frontend
+        run: npm audit
+      - name: Build
+        working-directory: app/frontend
+        run: npm run build
+      - name: Verify committed output
+        run: |
+          git diff --exit-code -- app/frontend/dist
+          test -z "$(git status --porcelain --untracked-files=all -- app/frontend/dist)"
+
+  container:
+    name: Local image build + self-mod gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Build
+        run: docker build -t quine-local:ci .
+      - name: Validate manifest-driven frontend build
+        run: >-
+          docker run --rm --entrypoint /app/.venv/bin/python quine-local:ci -c
+          "import json,pathlib,subprocess;
+          root=pathlib.Path('/app/app');
+          manifest=json.loads((root/'app_manifest.json').read_text(encoding='utf-8'));
+          assert subprocess.check_output(['node','--version'],text=True).startswith('v24.');
+          subprocess.run(manifest['build'],cwd=root/manifest['build_dir'],shell=True,check=True);
+          assert (root/manifest['serve_root']).is_file()"
