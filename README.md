@@ -15,18 +15,24 @@ This repository contains the local self-hosted core only.
 - Local React interface, knowledge search, development workspace, plugins, usage, audit, and version review
 - Offline scripted-engine test coverage
 
-## Quick start
+## Download and quick start
 
-Requirements: Python 3.12+, [uv](https://docs.astral.sh/uv/), Git, and Node.js 24+ for frontend-changing self-modifications.
+Requirements: Python 3.12+, [uv](https://docs.astral.sh/uv/), and Git. Node.js 24+ is needed only when a self-modification changes the frontend.
+
+Clone the source:
 
 ```sh
+git clone https://github.com/dopez007/quine-local.git
+cd quine-local
 uv sync --frozen
 uv run python -m bootstrap.boot
 ```
 
-Open <http://127.0.0.1:8000>.
+GitHub also offers **Code → Download ZIP**. Extract it, open a terminal in the extracted `quine-local` folder, then run the last two commands above.
 
-Quine boots with a deterministic scripted engine and does not need an API key for the initial run or tests.
+Open <http://127.0.0.1:8000>. A successful boot loads the Quine UI; <http://127.0.0.1:8000/health> returns HTTP 200.
+
+The server can start without an API key. The default agent configuration uses LiteLLM with `deepseek/deepseek-v4-flash`, so real model-backed chat and self-modification need a configured provider key. The serial test lanes use the deterministic scripted engine and need no provider key:
 
 ```sh
 uv sync --frozen --group test
@@ -36,9 +42,19 @@ uv run --group test python scripts/test_low_memory.py contract
 
 Both lanes are serial and enforce process-tree memory, child-process, timeout, and orphan budgets. Heavy integration/system scenarios are explicit and never part of the default Windows run.
 
-For a real provider, copy `state/secrets.env.example` to `state/secrets.env`, add a provider key, and configure a LiteLLM model identifier in `state/config.yaml`. Do not commit `state/`.
+For the default provider, copy the example and add `DEEPSEEK_API_KEY`:
 
-## Data, upgrades, and containers
+```sh
+# macOS/Linux
+cp state/secrets.env.example state/secrets.env
+
+# Windows PowerShell
+Copy-Item state/secrets.env.example state/secrets.env
+```
+
+Edit `state/secrets.env`, then change `agent.model` in the generated `state/config.yaml` when using another LiteLLM provider or model. Do not commit `state/`.
+
+## Data, upgrades, and Docker
 
 Runtime data is deliberately outside the versioned application:
 
@@ -46,13 +62,15 @@ Runtime data is deliberately outside the versioned application:
 - `data/` — conversations, knowledge, plugins, settings, and development output
 - `slots/` — generated boot cache; do not migrate it
 
-To upgrade, unpack a new release into a new folder and copy only `state/` and `data/` before first boot. You can instead set `QUINE_STATE_HOME` so runtime data lives outside the installation directory.
+For an upgrade, use a freshly cloned or downloaded source snapshot in a new folder and copy only `state/` and `data/` before first boot. You can instead set `QUINE_STATE_HOME` so runtime data lives outside the installation directory.
+
+Docker requires Docker Desktop or Docker Engine. For provider-backed use, create and configure `state/secrets.env` as above, then run:
 
 ```sh
 docker compose up --build
 ```
 
-The image runs as a non-root user and persists `state/` and `data/` through mounted volumes. Local operation does not make generated application code a strong security sandbox; use stronger isolation for untrusted code.
+Open <http://127.0.0.1:8000>. The compose sample publishes port 8000 and is for trusted local use only; do not expose it publicly without the authentication, network controls, TLS, and reviewed deployment model described in [SECURITY.md](SECURITY.md). The image runs as a non-root user and persists `state/` and `data/` through mounted volumes. Local operation does not make generated application code a strong security sandbox; use stronger isolation for untrusted code.
 
 ## License
 
