@@ -8,9 +8,9 @@ This repository contains the local self-hosted core only.
 
 ## See it in action
 
-[![Synthetic Quine product illustration](assets/quine-tour-poster.jpg)](assets/quine-teaser.mp4)
+![Animated synthetic Quine product illustration](assets/quine-teaser-preview.gif)
 
-[Watch the 19-second teaser](assets/quine-teaser.mp4). It is a synthetic product illustration of Quine's versioned self-modification flow, not a recording of a live instance or customer data.
+This 19-second animated preview is a synthetic product illustration of Quine's versioned self-modification flow, not a recording of a live instance or customer data.
 
 ## What is included
 

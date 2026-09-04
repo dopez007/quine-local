@@ -8,7 +8,7 @@
     },
     {
       "path": ".gitattributes",
-      "sha256": "19bebccdd41bead866799ddfede59ffa2b90fa8f1d746b488a4a8cc7df0dd0db"
+      "sha256": "be17f8f48d2c189500634c0a26d130a865c1fb1aaf430ea91524f0ecf886422e"
     },
     {
       "path": ".github/workflows/ci.yml",
@@ -44,7 +44,7 @@
     },
     {
       "path": "README.md",
-      "sha256": "34a1127f32b6d0fef9757a916fa7e316012c2bf6ce2082716308948678c79e1b"
+      "sha256": "2d47bda6587bfc51a2abe472115bc7cd379e12f6ea7ac0464d0dddf78b3f9fbd"
     },
     {
       "path": "SECURITY.md",
@@ -403,8 +403,8 @@
       "sha256": "c60dfc4ae3b17e4325343af7ceb599518a6bcf3fdbfe15d69c6ae04327045b40"
     },
     {
-      "path": "assets/quine-teaser.mp4",
-      "sha256": "fb85d208537569fe1c94eca61c701d43d713098e884e9afb9f0dd5a2db00a33e"
+      "path": "assets/quine-teaser-preview.gif",
+      "sha256": "c0891057675dcbc4c28083b798d7bc161a2cfbc1c7feb5f06dca717cdd7f4ee6"
     },
     {
       "path": "assets/quine-tour-poster.jpg",

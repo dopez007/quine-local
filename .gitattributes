@@ -19,6 +19,6 @@
 Dockerfile text eol=lf
 LICENSE text eol=lf
 NOTICE text eol=lf
+*.gif -text
 *.jpg -text
-*.mp4 -text
 *.woff2 -text
