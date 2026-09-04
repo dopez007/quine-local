@@ -6,6 +6,12 @@ This repository contains the local self-hosted core only.
 
 > **Status:** experimental source-available software. Review the safety and secret boundaries before using a real provider key. Keep backups of `state/` and `data/`.
 
+## See it in action
+
+[![Synthetic Quine product illustration](assets/quine-tour-poster.jpg)](assets/quine-teaser.mp4)
+
+[Watch the 19-second teaser](assets/quine-teaser.mp4). It is a synthetic product illustration of Quine's versioned self-modification flow, not a recording of a live instance or customer data.
+
 ## What is included
 
 - Immutable firmware and kernel mechanisms under `bootstrap/` and `kernel/`
