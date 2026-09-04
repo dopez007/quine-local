@@ -10,7 +10,7 @@ Security fixes target the latest public local-core release. Older snapshots may 
 
 Do not open a public issue containing exploit details, credentials, private data, or a working destructive payload.
 
-When this repository is public, use GitHub **Security → Report a vulnerability** to create a private vulnerability report. That control must be enabled and verified as part of the approved publication process.
+For a public release, use GitHub **Security → Report a vulnerability** to create a private vulnerability report.
 
 Include:
 

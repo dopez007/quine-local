@@ -44,11 +44,11 @@
     },
     {
       "path": "README.md",
-      "sha256": "d836568104d5abff475e44c5b71baaa156f781b454824858eb6d7767b53ba524"
+      "sha256": "2f5325fb356a19275621cca386cfa6979c72c0fae957a29d09fd7b7eb88f467b"
     },
     {
       "path": "SECURITY.md",
-      "sha256": "67ec80f4f55c159e33410388609c2afcb9bc439580d3c2d2de01e490fc11a17b"
+      "sha256": "a4b1a10cb70e374b65a2d79430d57274fa8171b1b575208b74ef2be9df460c3d"
     },
     {
       "path": "app/.gitignore",
@@ -428,7 +428,7 @@
     },
     {
       "path": "docs/TRADEMARKS.md",
-      "sha256": "5057cfd1c3aa1766ab71422b43dbb70a25a77e1c203da5124de849b09f80d9d1"
+      "sha256": "5ef24b44452aba4a0eb93ced70967d429f5b32384ad17826832a3686dc24ddf7"
     },
     {
       "path": "kernel/__init__.py",

@@ -79,4 +79,4 @@ Code pull requests are not accepted yet. This keeps the project owner-controlled
 
 ## Security
 
-Do not post exploit details, credentials, private conversations, uploaded documents, generated code, or destructive payloads in public issues. After an explicitly approved public release, use GitHub **Security → Report a vulnerability** for private reports. See [SECURITY.md](SECURITY.md) for boundaries and reporting expectations.
+Do not post exploit details, credentials, private conversations, uploaded documents, generated code, or destructive payloads in public issues. For private reports on a public release, follow [SECURITY.md](SECURITY.md).
